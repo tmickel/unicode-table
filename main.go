@@ -17,6 +17,6 @@ func DisplayTable(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	for _, entry := range table {
-		fmt.Fprintf(w, "&#%s;%s<br />", entry.CodePoint, entry.CharacterName)
+		fmt.Fprintf(w, "&#x%s;%s<br />", entry.CodePoint, entry.CharacterName)
 	}
 }
