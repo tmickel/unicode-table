@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -25,6 +26,8 @@ func DisplayTable(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "failed to unquote %s\n", entry.CodePoint)
 			continue
 		}
-		fmt.Fprintf(w, "%s | %s | %s | %s\n", entry.CodePoint, char, entry.CharacterName, entry.Unicode1Name)
+		charName := strings.Title(strings.ToLower(entry.CharacterName))
+		oldName := strings.Title(strings.ToLower(entry.Unicode1Name))
+		fmt.Fprintf(w, "%s | %s | %s | %s\n", entry.CodePoint, char, charName, oldName)
 	}
 }
