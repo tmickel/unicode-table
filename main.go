@@ -6,14 +6,16 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", HelloServer)
+	http.HandleFunc("/", DisplayTable)
 	http.ListenAndServe(":80", nil)
 }
 
-func HelloServer(w http.ResponseWriter, r *http.Request) {
+func DisplayTable(w http.ResponseWriter, r *http.Request) {
 	table, err := FetchTable()
 	if err != nil {
 		fmt.Fprintf(w, "could not fetch current unicode table: %v", err)
 	}
-	fmt.Fprintf(w, "%#v", table)
+	for _, entry := range table {
+		fmt.Fprintf(w, "%s\n", entry.CodePoint)
+	}
 }
