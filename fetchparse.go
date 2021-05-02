@@ -32,6 +32,7 @@ func FetchTable() ([]*Entry, error) {
 	defer resp.Body.Close()
 
 	r := csv.NewReader(resp.Body)
+	r.Comma = ';'
 
 	entries := []*Entry{}
 
