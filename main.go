@@ -15,7 +15,8 @@ func DisplayTable(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintf(w, "could not fetch current unicode table: %v", err)
 	}
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	for _, entry := range table {
-		fmt.Fprintf(w, "%s\n", entry.CodePoint)
+		fmt.Fprintf(w, "%s<br />", entry.CodePoint)
 	}
 }
