@@ -15,5 +15,5 @@ func HelloServer(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintf(w, "could not fetch current unicode table: %v", err)
 	}
-	fmt.Fprintf(w, "%s", table)
+	fmt.Fprintf(w, "%#v", table)
 }
