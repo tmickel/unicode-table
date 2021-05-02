@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 )
 
 func main() {
@@ -15,8 +16,12 @@ func DisplayTable(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintf(w, "could not fetch current unicode table: %v", err)
 	}
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	for _, entry := range table {
-		fmt.Fprintf(w, "&#x%s;%s<br />", entry.CodePoint, entry.CharacterName)
+		char, err := strconv.Unquote(`"\u` + entry.CodePoint + `"`)
+		if err != nil {
+			fmt.Fprintf(w, "failed to unquote %s\n", entry.CodePoint)
+			continue
+		}
+		fmt.Fprintf(w, "%s: %s\n", char, entry.CharacterName)
 	}
 }
