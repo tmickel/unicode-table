@@ -17,7 +17,7 @@ func DisplayTable(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "could not fetch current unicode table: %v", err)
 	}
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	fmt.Fprint(w, "Tim's Complete Unicode Table, fetched live\n\n")
+	fmt.Fprint(w, "Tim's Complete Unicode Table, fetched live from unicode.org\n\n")
 	for _, entry := range table {
 		encoded := fmt.Sprintf("%08s", entry.CodePoint)
 		char, err := strconv.Unquote(`"\U` + encoded + `"`)
