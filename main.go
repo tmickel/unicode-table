@@ -11,5 +11,9 @@ func main() {
 }
 
 func HelloServer(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, %s from unicode-table!", r.URL.Path[1:])
+	table, err := FetchTable()
+	if err != nil {
+		fmt.Fprintf(w, "could not fetch current unicode table: %v", err)
+	}
+	fmt.Fprintf(w, "%s", table)
 }
