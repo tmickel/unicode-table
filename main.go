@@ -25,6 +25,6 @@ func DisplayTable(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "failed to unquote %s\n", entry.CodePoint)
 			continue
 		}
-		fmt.Fprintf(w, "%s | %s | %s\n", char, entry.CharacterName, entry.CodePoint)
+		fmt.Fprintf(w, "%s | %s | %s | %s\n", char, entry.CharacterName, entry.Unicode1Name, entry.CodePoint)
 	}
 }
